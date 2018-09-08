@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LeagueApp</string>
+    <string name="search_to_league">Búsqueda por liga...</string>
 </resources>

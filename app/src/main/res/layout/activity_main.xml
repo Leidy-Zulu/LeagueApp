@@ -4,12 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context=".controllers.activities.LeagueActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutContent"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardViewSearh"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="4dp">
+
+
+        <TextView
+            android:id="@+id/textViewLeague"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:gravity="start|center"
+            android:hint="@string/search_to_league"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGray" />
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewTeam"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cardViewSearh"
+        android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

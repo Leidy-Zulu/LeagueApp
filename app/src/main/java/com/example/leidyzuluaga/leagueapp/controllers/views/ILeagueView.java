@@ -8,4 +8,6 @@ public interface ILeagueView extends IBaseView{
 
 
     void showListTeam(ArrayList<Team> teams);
+
+    void startLeagueDetail(Team team);
 }
