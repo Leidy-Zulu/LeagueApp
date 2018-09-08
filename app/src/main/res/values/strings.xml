@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">LeagueApp</string>
     <string name="search_to_league">Búsqueda por liga...</string>
+    <string name="title">Apreciado usuario</string>
+    <string name="validate_internet">Por favor verifique su conexión a internet</string>
+    <string name="text_load_again">Intenta de nuevo</string>
+    <string name="cancel">Cancelar</string>
 </resources>

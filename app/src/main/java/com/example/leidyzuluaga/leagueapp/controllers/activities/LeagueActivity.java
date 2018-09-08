@@ -1,5 +1,6 @@
 package com.example.leidyzuluaga.leagueapp.controllers.activities;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,5 +65,37 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
     @Override
     public void startLeagueDetail(Team team) {
         //TODO
+    }
+
+    @Override
+    public void showAlertDialogGeneral(final int title, final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showAlertDialog(title, message);
+            }
+        });
+
+    }
+
+    private void showAlertDialog(int title, String message){
+        getCustomAlertDialog().showAlertDialog(title, message, false, R.string.text_load_again, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                getPresenter().validateInternetToConsultListTeam(Constants.SPANISH_LA_LIGA);
+            }
+        }, R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void showAlertDialogGeneral(int title, int message) {
+        showAlertDialog(message, getResources().getString(message));
     }
 }

@@ -1,5 +1,6 @@
 package com.example.leidyzuluaga.leagueapp.presenters;
 
+import com.example.leidyzuluaga.leagueapp.R;
 import com.example.leidyzuluaga.leagueapp.controllers.views.ILeagueView;
 import com.example.leidyzuluaga.leagueapp.models.Team;
 import com.example.leidyzuluaga.leagueapp.models.TeamObject;
@@ -21,6 +22,8 @@ public class LeaguePresenter extends BasePresenter<ILeagueView> {
     public void validateInternetToConsultListTeam(int codeTeam) {
         if (getValidateInternet().isConnected()){
             createThreadToConsultListTeam(codeTeam);
+        }else{
+            getView().showAlertDialogGeneral(R.string.title, R.string.validate_internet);
         }
     }
 
@@ -39,7 +42,7 @@ public class LeaguePresenter extends BasePresenter<ILeagueView> {
             TeamObject teamObject = leagueRepository.consultTeam(codeTeam);
             getView().showListTeam(teamObject.getTeams());
         } catch (IOException e) {
-            e.printStackTrace();
+            getView().showAlertDialogGeneral(R.string.title, e.getMessage());
         }
     }
 }

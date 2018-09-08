@@ -10,4 +10,8 @@ public interface ILeagueView extends IBaseView{
     void showListTeam(ArrayList<Team> teams);
 
     void startLeagueDetail(Team team);
+
+    void showAlertDialogGeneral(int title, String message);
+
+    void showAlertDialogGeneral(int title, int message);
 }
