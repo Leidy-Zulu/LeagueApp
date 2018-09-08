@@ -1,7 +1,9 @@
-package com.example.leidyzuluaga.leagueapp;
+package com.example.leidyzuluaga.leagueapp.controllers.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.leidyzuluaga.leagueapp.R;
 
 public class LeagueDetailActivity extends AppCompatActivity {
 
