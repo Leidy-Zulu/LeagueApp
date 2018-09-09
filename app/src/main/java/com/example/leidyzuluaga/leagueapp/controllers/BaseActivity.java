@@ -51,5 +51,33 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
         this.presenter = presenter;
     }
 
+    public DialogInterface.OnClickListener getDefaulButtonOnClickListener() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+    }
 
+
+    @Override
+    public void showAlertDialogGeneral(final int title, final int message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                customAlertDialog.showAlertDialog(title, message, false, R.string.accept, getDefaulButtonOnClickListener());
+            }
+        });
+    }
+
+    @Override
+    public void showAlertDialogGeneral(final int title, final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                customAlertDialog.showAlertDialog(title, message, false, R.string.accept, getDefaulButtonOnClickListener());
+            }
+        });
+    }
 }

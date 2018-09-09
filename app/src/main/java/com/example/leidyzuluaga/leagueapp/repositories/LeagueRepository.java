@@ -3,9 +3,11 @@ package com.example.leidyzuluaga.leagueapp.repositories;
 import com.example.leidyzuluaga.leagueapp.controllers.services.IServicesLeague;
 import com.example.leidyzuluaga.leagueapp.controllers.services.ServicesFactory;
 import com.example.leidyzuluaga.leagueapp.helper.Constants;
+import com.example.leidyzuluaga.leagueapp.models.EventObject;
 import com.example.leidyzuluaga.leagueapp.models.TeamObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -28,6 +30,21 @@ public class LeagueRepository implements ILeagueRepository {
                  throw defaultError();
             } else {
                 return teamObjectResponse.body();
+            }
+        } catch (IOException exception) {
+            throw  defaultError();
+        }
+    }
+
+    @Override
+    public EventObject consultEvent(String id) throws IOException {
+        try {
+            Call<EventObject> call = iServicesLeague.consultEvent(id);
+            Response<EventObject> eventObjectResponse = call.execute();
+            if (eventObjectResponse.errorBody() != null || eventObjectResponse.body().getEvents() == null) {
+                throw defaultError();
+            } else {
+                return eventObjectResponse.body();
             }
         } catch (IOException exception) {
             throw  defaultError();

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageViewBadge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center" />
 
 
@@ -21,7 +21,7 @@
         android:textStyle="bold"
         tools:text="Liga española - 2018" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -30,10 +30,11 @@
 
         <ImageView
             android:id="@+id/imageViewWebSite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
 
         <ImageView
+            android:layout_toRightOf="@id/imageViewWebSite"
             android:id="@+id/imageViewFacebook"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -41,6 +42,7 @@
             android:src="@mipmap/facebook" />
 
         <ImageView
+            android:layout_toRightOf="@id/imageViewFacebook"
             android:id="@+id/imageViewInstagram"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -48,6 +50,7 @@
             android:src="@mipmap/instagram" />
 
         <ImageView
+            android:layout_toRightOf="@id/imageViewInstagram"
             android:id="@+id/imageViewTwitter"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -55,19 +58,35 @@
             android:src="@mipmap/twitter" />
 
         <ImageView
+            android:layout_toRightOf="@id/imageViewTwitter"
             android:id="@+id/imageViewYoutube"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="4dp"
             android:src="@mipmap/youtube" />
 
-    </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:text="@string/title_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorBlack"/>
+
+    <ListView
+        android:id="@+id/listViewEvents"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"></ListView>
 
     <ScrollView
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
 
 
         <TextView
@@ -77,6 +96,8 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
     </ScrollView>
+
+
 
 
 </LinearLayout>

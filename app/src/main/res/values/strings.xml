@@ -5,4 +5,6 @@
     <string name="validate_internet">Por favor verifique su conexión a internet</string>
     <string name="text_load_again">Intenta de nuevo</string>
     <string name="cancel">Cancelar</string>
+    <string name="accept">Aceptar</string>
+    <string name="title_event">Eventos</string>
 </resources>

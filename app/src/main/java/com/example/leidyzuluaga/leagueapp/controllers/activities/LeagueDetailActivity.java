@@ -1,18 +1,29 @@
 package com.example.leidyzuluaga.leagueapp.controllers.activities;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.leidyzuluaga.leagueapp.R;
+import com.example.leidyzuluaga.leagueapp.controllers.BaseActivity;
+import com.example.leidyzuluaga.leagueapp.controllers.views.ILeagueDetailView;
+import com.example.leidyzuluaga.leagueapp.domain.DomainModule;
 import com.example.leidyzuluaga.leagueapp.helper.Constants;
+import com.example.leidyzuluaga.leagueapp.models.Event;
 import com.example.leidyzuluaga.leagueapp.models.Team;
+import com.example.leidyzuluaga.leagueapp.presenters.LeagueDetailPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
-public class LeagueDetailActivity extends AppCompatActivity {
+public class LeagueDetailActivity extends BaseActivity<LeagueDetailPresenter> implements ILeagueDetailView {
 
     private ImageView imageViewBadge;
     private ImageView imageViewWebSite;
@@ -22,13 +33,17 @@ public class LeagueDetailActivity extends AppCompatActivity {
     private ImageView imageViewYoutube;
     private TextView textViewName;
     private TextView textViewDescription;
+    private ListView listViewEvents;
     private Team team;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_league_detail);
+        setPresenter(new LeagueDetailPresenter(DomainModule.getLeagueRepositoryInstance()));
+        getPresenter().inject(this, getValidateInternet());
         team = (Team) getIntent().getSerializableExtra(Constants.TEAM);
+        getPresenter().validateInternetToConsultListEvent(team.getId());
         loadView();
         loadListener();
         loadData();
@@ -41,7 +56,43 @@ public class LeagueDetailActivity extends AppCompatActivity {
     }
 
     private void loadListener() {
+        imageViewFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateStringUrl(team.getFacebook());
+            }
+        });
+        imageViewInstagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateStringUrl(team.getInstagram());
+            }
+        });
+        imageViewTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateStringUrl(team.getTwitter());
+            }
+        });
+        imageViewYoutube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateStringUrl(team.getYoutube());
+            }
+        });
+    }
 
+    private void validateStringUrl(String url){
+        if (!url.isEmpty()){
+            openUrl(url);
+        }
+    }
+
+    private void openUrl(String url){
+        String data = url.replaceFirst("www", "https://www");
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(data));
+        startActivity(i);
     }
 
     private void loadView() {
@@ -53,5 +104,26 @@ public class LeagueDetailActivity extends AppCompatActivity {
         imageViewYoutube = findViewById(R.id.imageViewYoutube);
         textViewName = findViewById(R.id.textViewName);
         textViewDescription = findViewById(R.id.textViewDescription);
+        listViewEvents = findViewById(R.id.listViewEvents);
+    }
+
+    @Override
+    public void showListEvent(final ArrayList<Event> eventArrayList) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(LeagueDetailActivity.this, android.R.layout.simple_list_item_1, getItemsArrayFromListEvent(eventArrayList));
+                listViewEvents.setAdapter(arrayAdapter);
+            }
+        });
+
+    }
+
+    private String[] getItemsArrayFromListEvent(ArrayList<Event> eventArrayList){
+        String[] items = new String[eventArrayList.size()];
+        for (int i = 0; i < eventArrayList.size(); i++) {
+            items[i] = eventArrayList.get(i).getDescription();
+        }
+        return items;
     }
 }

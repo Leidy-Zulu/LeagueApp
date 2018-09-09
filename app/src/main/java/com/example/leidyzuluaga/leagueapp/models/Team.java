@@ -8,6 +8,10 @@ import java.io.Serializable;
 public class Team implements Serializable{
 
 
+    @SerializedName("idTeam")
+    @Expose
+    private String id;
+
     @SerializedName("strTeam")
     @Expose
     private String name;
@@ -139,5 +143,13 @@ public class Team implements Serializable{
 
     public void setYoutube(String youtube) {
         this.youtube = youtube;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
