@@ -1,6 +1,7 @@
 package com.example.leidyzuluaga.leagueapp.controllers.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,7 +65,9 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
 
     @Override
     public void startLeagueDetail(Team team) {
-        //TODO
+        Intent intent = new Intent(this, LeagueDetailActivity.class);
+        intent.putExtra(Constants.TEAM, team);
+        startActivity(intent);
     }
 
     @Override

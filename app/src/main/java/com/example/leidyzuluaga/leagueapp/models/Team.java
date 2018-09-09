@@ -3,7 +3,9 @@ package com.example.leidyzuluaga.leagueapp.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Team {
+import java.io.Serializable;
+
+public class Team implements Serializable{
 
 
     @SerializedName("strTeam")
@@ -18,7 +20,7 @@ public class Team {
     @Expose
     private String badge;
 
-    @SerializedName("strDescriptionEN")
+    @SerializedName("strDescriptionES")
     @Expose
     private String descripcion;
 
