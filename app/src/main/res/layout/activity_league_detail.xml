@@ -53,7 +53,8 @@
             <ImageView
                 android:id="@+id/imageViewWebSite"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:src="@drawable/ic_cloud_circle_black_24dp" />
 
             <ImageView
                 android:id="@+id/imageViewFacebook"

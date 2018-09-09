@@ -34,6 +34,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
     private RecyclerView recyclerView;
     private TeamAdapter teamAdapter;
     private League league;
+    private ArrayList<League> leagues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,17 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
         cardViewSearh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getPresenter().validateInternetToConsultListLeague();
+                validateEmptyLeagues();
             }
         });
+    }
+
+    private void validateEmptyLeagues() {
+        if (leagues == null) {
+            getPresenter().validateInternetToConsultListLeague();
+        } else {
+            dialogSearch.show();
+        }
     }
 
     private void loadView() {
@@ -74,14 +83,14 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
         });
     }
 
-    private void loadingView(boolean isShowing){
+    private void loadingView(boolean isShowing) {
         progressBar.setVisibility(isShowing ? View.GONE : View.VISIBLE);
         linearLayoutContent.setVisibility(isShowing ? View.VISIBLE : View.GONE);
     }
 
     private void loadListTeam(ArrayList<Team> teams) {
         teamAdapter = new TeamAdapter(this, this, teams);
-        LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(teamAdapter);
     }
@@ -104,7 +113,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
 
     }
 
-    private void showAlertDialog(int title, String message){
+    private void showAlertDialog(int title, String message) {
         getCustomAlertDialog().showAlertDialog(title, message, false, R.string.text_load_again, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -136,6 +145,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
     }
 
     private void loadListLeague(ArrayList<League> leagues) {
+        this.leagues = leagues;
         dialogSearch = new DialogSearch(this, leagues,
                 new DialogSearch.IDialogSelection() {
                     @Override

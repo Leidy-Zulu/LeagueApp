@@ -58,6 +58,12 @@ public class LeagueDetailActivity extends BaseActivity<LeagueDetailPresenter> im
     }
 
     private void loadListener() {
+        imageViewWebSite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateStringUrl(team.getWebSite());
+            }
+        });
         imageViewFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,13 +90,13 @@ public class LeagueDetailActivity extends BaseActivity<LeagueDetailPresenter> im
         });
     }
 
-    private void validateStringUrl(String url){
-        if (!url.isEmpty()){
+    private void validateStringUrl(String url) {
+        if (!url.isEmpty()) {
             openUrl(url);
         }
     }
 
-    private void openUrl(String url){
+    private void openUrl(String url) {
         String urlArray[] = url.split(Constants.WWWW);
         String finalUrl = Constants.HTTP + (urlArray.length > 1 ? urlArray[1] : urlArray[0]);
         Intent i = new Intent(Intent.ACTION_VIEW);
@@ -123,7 +129,7 @@ public class LeagueDetailActivity extends BaseActivity<LeagueDetailPresenter> im
 
     }
 
-    private String[] getItemsArrayFromListEvent(ArrayList<Event> eventArrayList){
+    private String[] getItemsArrayFromListEvent(ArrayList<Event> eventArrayList) {
         String[] items = new String[eventArrayList.size()];
         for (int i = 0; i < eventArrayList.size(); i++) {
             items[i] = eventArrayList.get(i).getDescription();
