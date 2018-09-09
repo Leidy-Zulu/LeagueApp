@@ -27,6 +27,7 @@ public class LeagueDetailActivity extends BaseActivity<LeagueDetailPresenter> im
 
     private ImageView imageViewBadge;
     private ImageView imageViewWebSite;
+    private ImageView imageViewJersey;
     private ImageView imageViewFacebook;
     private ImageView imageViewInstagram;
     private ImageView imageViewTwitter;
@@ -51,6 +52,7 @@ public class LeagueDetailActivity extends BaseActivity<LeagueDetailPresenter> im
 
     private void loadData() {
         Picasso.get().load(team.getBadge()).into(imageViewBadge);
+        Picasso.get().load(team.getJersey()).into(imageViewJersey);
         textViewName.setText(team.getName() + "-" + team.getFormedYear());
         textViewDescription.setText(team.getDescripcion());
     }
@@ -89,9 +91,10 @@ public class LeagueDetailActivity extends BaseActivity<LeagueDetailPresenter> im
     }
 
     private void openUrl(String url){
-        String data = url.replaceFirst("www", "https://www");
+        String urlArray[] = url.split(Constants.WWWW);
+        String finalUrl = Constants.HTTP + (urlArray.length > 1 ? urlArray[1] : urlArray[0]);
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(data));
+        i.setData(Uri.parse(finalUrl));
         startActivity(i);
     }
 
@@ -105,6 +108,7 @@ public class LeagueDetailActivity extends BaseActivity<LeagueDetailPresenter> im
         textViewName = findViewById(R.id.textViewName);
         textViewDescription = findViewById(R.id.textViewDescription);
         listViewEvents = findViewById(R.id.listViewEvents);
+        imageViewJersey = findViewById(R.id.imageViewJersey);
     }
 
     @Override

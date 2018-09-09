@@ -1,6 +1,7 @@
 package com.example.leidyzuluaga.leagueapp.controllers.services;
 
 import com.example.leidyzuluaga.leagueapp.models.EventObject;
+import com.example.leidyzuluaga.leagueapp.models.LeagueObject;
 import com.example.leidyzuluaga.leagueapp.models.Team;
 import com.example.leidyzuluaga.leagueapp.models.TeamObject;
 
@@ -15,4 +16,7 @@ public interface IServicesLeague {
 
     @GET("eventsnext.php")
     Call<EventObject> consultEvent(@Query("id") String id);
+
+    @GET("all_leagues.php")
+    Call<LeagueObject> consultLeague();
 }

@@ -4,6 +4,7 @@ import com.example.leidyzuluaga.leagueapp.controllers.services.IServicesLeague;
 import com.example.leidyzuluaga.leagueapp.controllers.services.ServicesFactory;
 import com.example.leidyzuluaga.leagueapp.helper.Constants;
 import com.example.leidyzuluaga.leagueapp.models.EventObject;
+import com.example.leidyzuluaga.leagueapp.models.LeagueObject;
 import com.example.leidyzuluaga.leagueapp.models.TeamObject;
 
 import java.io.IOException;
@@ -45,6 +46,21 @@ public class LeagueRepository implements ILeagueRepository {
                 throw defaultError();
             } else {
                 return eventObjectResponse.body();
+            }
+        } catch (IOException exception) {
+            throw  defaultError();
+        }
+    }
+
+    @Override
+    public LeagueObject consultLeague() throws IOException {
+        try {
+            Call<LeagueObject> call = iServicesLeague.consultLeague();
+            Response<LeagueObject> leagueObjectResponse = call.execute();
+            if (leagueObjectResponse.errorBody() != null || leagueObjectResponse.body().getLeagues() == null) {
+                throw defaultError();
+            } else {
+                return leagueObjectResponse.body();
             }
         } catch (IOException exception) {
             throw  defaultError();

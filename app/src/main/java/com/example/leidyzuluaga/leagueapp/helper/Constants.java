@@ -7,4 +7,7 @@ public class Constants {
     public static final int SPANISH_LA_LIGA = 4335;
     public static final String DEFAUL_ERROR = "Ha ocurrido un error, inténtalo nuevamente.";
     public static final String TEAM = "team";
+    public static final String EMPTY_STRING = "";
+    public static final String HTTP = "https://";
+    public static final String WWWW = "www.";
 }

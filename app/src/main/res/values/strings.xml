@@ -7,4 +7,5 @@
     <string name="cancel">Cancelar</string>
     <string name="accept">Aceptar</string>
     <string name="title_event">Eventos</string>
+    <string name="text_with_out_league">No existe el proveedor que busca</string>
 </resources>
