@@ -2,7 +2,6 @@ package com.example.leidyzuluaga.leagueapp.controllers.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,7 +38,7 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_league);
         setPresenter(new LeaguePresenter(DomainModule.getLeagueRepositoryInstance()));
         getPresenter().inject(this, getValidateInternet());
         loadView();
@@ -69,11 +68,15 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressBar.setVisibility(View.GONE);
-                linearLayoutContent.setVisibility(View.VISIBLE);
+                loadingView(true);
                 loadListTeam(teams);
             }
         });
+    }
+
+    private void loadingView(boolean isShowing){
+        progressBar.setVisibility(isShowing ? View.GONE : View.VISIBLE);
+        linearLayoutContent.setVisibility(isShowing ? View.VISIBLE : View.GONE);
     }
 
     private void loadListTeam(ArrayList<Team> teams) {
@@ -146,6 +149,8 @@ public class LeagueActivity extends BaseActivity<LeaguePresenter> implements ILe
 
     private void loadTextItemSelected() {
         textViewLeague.setText(league.getName());
+        loadingView(false);
+        getPresenter().validateInternetToConsultListTeam(Integer.parseInt(league.getId()));
     }
 
 }
